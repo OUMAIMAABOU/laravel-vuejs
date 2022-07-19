@@ -19,21 +19,18 @@ class EtudiantController extends Controller
      */
     public function index(Request $request)
     {
-        // $params = $request->all();
+        $params = $request->all();
 
-        // $data = Etudiant::query()
-         
-        //     ->when(!empty($params['keyword']), function (Builder $query) use ($params) {
-        //         $query->where(function ($q) use ($params) {
-        //             $q->where('nom', 'like', '%' . $params['keyword'] . '%')
-        //                 ->orWhere('genre', 'like', '%' . $params['keyword'] . '%');
-        //         });
-        //     });
-            // ->paginate($params['per_page'] ?? 10);
-            $Etudiant=Etudiant::get();
-        return response()->json( $Etudiant);
+        $data = Etudiant::query()->where(function ($q) use ($params) {
+                    $q->where('nom', 'like', '%' . $params['keyword'] . '%')
+                        ->orWhere('genre', 'like', '%' . $params['keyword'] . '%');
+                })
+        
+            ->paginate($params['per_page'] ?? 10);
+        //     $Etudiant=Etudiant::get();
+        // return response()->json( $Etudiant);
 
-        // return EtudiantResources::collection($data);
+        return EtudiantResources::collection($data);
     }
 
     /**
