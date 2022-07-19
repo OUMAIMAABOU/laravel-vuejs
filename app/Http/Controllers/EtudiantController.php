@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use App\Http\Resources\EtudiantResources;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -17,20 +18,12 @@ class EtudiantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $params = $request->all();
+    
+            $Etudiant=Etudiant::all();
+        return response()->json($Etudiant);
 
-        $data = Etudiant::query()->where(function ($q) use ($params) {
-                    $q->where('nom', 'like', '%' . $params['keyword'] . '%')
-                        ->orWhere('genre', 'like', '%' . $params['keyword'] . '%');
-                })
-        
-            ->paginate($params['per_page'] ?? 10);
-        //     $Etudiant=Etudiant::get();
-        // return response()->json( $Etudiant);
-
-        return EtudiantResources::collection($data);
     }
 
     /**
@@ -53,11 +46,14 @@ class EtudiantController extends Controller
    {
     $params = $request->all();
     $etudiant = Etudiant::create([
-        'nom' => $params['nom'],
+        'nom' =>$params['nom'],
         'prenom' => $params['prenom'],
-        'age' => $params['age'],
+        'Age' => $params['Age'],
         'genre' => $params['genre'] ,
     ]);
+    return $etudiant;
+
+
     }
 
     /**

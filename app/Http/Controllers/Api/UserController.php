@@ -76,7 +76,6 @@ class UserController extends BaseController
         } else {
             try {
                 $params = $request->all();
-                DB::beginTransaction();
                 $user = User::create([
                     'name' => $params['name'],
                     'email' => $params['email'],
@@ -87,9 +86,11 @@ class UserController extends BaseController
                 ]);
                 $role = Role::findByName($params['role']);
                 $user->syncRoles($role);
-                $loginUser = Auth::user();
+                $loginUser =
+                 Auth::user();
 
                 Log::query()->create([
+                    
                     'user_id' => $user->id,
                     'operator_id' => $loginUser->id,
                     'title' => 'Create',

@@ -60,7 +60,6 @@ Route::group(['middleware'=>'api'],function(){
     // Route::post(uri:'etudiants',action:'EtudiantController@index');
     // Route::get(uri:'etudiants',action:'edite/{post},EtudiantController@edit');
     // Route::get('etudiants/{etudiant}', 'EtudiantController@edit');
-    // Route::get('etudiants/{request}', 'EtudiantController@index');
     Route::apiResource('etudiants', 'EtudiantController');
 
 
