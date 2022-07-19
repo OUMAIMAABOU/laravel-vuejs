@@ -57,9 +57,9 @@ Route::get('/orders', function () {
 
 
 Route::group(['middleware'=>'api'],function(){
-    Route::Post(uri:'etudiants',action:'EtudiantController@index');
+    Route::post(uri:'etudiants',action:'EtudiantController@index');
     // Route::get(uri:'etudiants',action:'edite/{post},EtudiantController@edit');
-    Route::get('edite/{etudiants}', 'EtudiantController@edit');
+    Route::get('etudiants/{etudiant}', 'EtudiantController@edit');
 
 
 
