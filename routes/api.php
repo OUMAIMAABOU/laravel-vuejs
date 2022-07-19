@@ -54,3 +54,15 @@ Route::get('/orders', function () {
 
     return responseSuccess(['items' => $data]);
 });
+
+
+Route::group(['middleware'=>'api'],function(){
+    // Route::post(uri:'etudiants',action:'EtudiantController@index');
+    // Route::get(uri:'etudiants',action:'edite/{post},EtudiantController@edit');
+    // Route::get('etudiants/{etudiant}', 'EtudiantController@edit');
+    Route::apiResource('etudiants', 'EtudiantController');
+
+
+
+
+});
