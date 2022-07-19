@@ -14,13 +14,13 @@ class EtudiantResources extends JsonResource
      */
     public function toArray($request)
     {
-         return [
+        return [
             // 'id' => $this->id,
             'nom' => $this->nom,
             'prenom' => $this->prenom,
             'Age' => $this->Age,
             'genre' => $this->genre,
-            
+
         ];
     }
 }

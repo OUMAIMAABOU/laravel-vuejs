@@ -56,13 +56,7 @@ Route::get('/orders', function () {
 });
 
 
-Route::group(['middleware'=>'api'],function(){
-    // Route::post(uri:'etudiants',action:'EtudiantController@index');
-    // Route::get(uri:'etudiants',action:'edite/{post},EtudiantController@edit');
-    Route::apiResource('etudiants', 'EtudiantController');
-    // Route::get('etudiants/{etudiant}', 'EtudiantController@index');
-
-
-
-
+Route::group(['middleware'=>['api','checkPassword']],function()
+{ 
+  Route::apiResource('etudiants', 'EtudiantController');
 });

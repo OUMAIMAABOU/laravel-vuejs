@@ -27,13 +27,10 @@ class EtudiantController extends Controller
                     ->orWhere('prenom', 'like', '%' . $params['keyword'] . '%');
             });
         })
-        ->paginate($params['page'] ?? 10);
+            ->paginate($params['page'] ?? 10);
 
-    
+
         return EtudiantResources::collection($data);
-
- //     $Etudiant=Etudiant::all();
-        // return response()->json($Etudiant);
     }
 
     /**
@@ -53,17 +50,15 @@ class EtudiantController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-   {
-    $params = $request->all();
-    $etudiant = Etudiant::create([
-        'nom' =>$params['nom'],
-        'prenom' => $params['prenom'],
-        'Age' => $params['Age'],
-        'genre' => $params['genre'] ,
-    ]);
-    return $etudiant;
-
-
+    {
+        $params = $request->all();
+        $etudiant = Etudiant::create([
+            'nom' => $params['nom'],
+            'prenom' => $params['prenom'],
+            'Age' => $params['Age'],
+            'genre' => $params['genre'],
+        ]);
+        return $etudiant;
     }
 
     /**
@@ -86,7 +81,7 @@ class EtudiantController extends Controller
     public function edit(Etudiant $request)
     {
         // $etudiants = Etudiant::get();
-   
+
         // $etudiants=Etudiant::find($etudiant);
         // // return view('edite', compact('etudiants'));
         // return response()->json( $etudiants);
@@ -97,8 +92,7 @@ class EtudiantController extends Controller
             ->orWhere('prenom', 'like', "%{$key}%")
             ->orderBy('created_at', 'desc')
             ->get();
-            return $posts;
-
+        return $posts;
     }
 
     /**
@@ -110,10 +104,10 @@ class EtudiantController extends Controller
      */
     public function update(Request $request, Etudiant $etudiant)
     {
-        $etudiant->update($request->all()) ;
-return response()->json([
-    'etudients'=>$etudiant
-]);
+        $etudiant->update($request->all());
+        return response()->json([
+            'etudients' => $etudiant
+        ]);
         // $etudiant = Etudiant::create([
         //     'nom' =>$params['nom'],
         //     'prenom' => $params['prenom'],
@@ -121,7 +115,7 @@ return response()->json([
         //     'genre' => $params['genre'] ,
         // ]);
         // return $etudiant;
-    
+
     }
 
     /**
@@ -132,9 +126,9 @@ return response()->json([
      */
     public function destroy(Etudiant $etudiant)
     {
-      
-            $etudiant->delete();
-      
+
+        $etudiant->delete();
+
         return "Bien supprimer";
     }
 }
