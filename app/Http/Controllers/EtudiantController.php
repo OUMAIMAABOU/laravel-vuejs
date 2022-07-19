@@ -116,12 +116,9 @@ return response()->json([
      */
     public function destroy(Etudiant $etudiant)
     {
-        try {
+      
             $etudiant->delete();
-        } catch (\Exception $ex) {
-            return responseFailed($ex->getMessage(), Response::HTTP_FORBIDDEN);
-        }
-
-        return responseSuccess();
+      
+        return "Bien supprimer";
     }
 }
