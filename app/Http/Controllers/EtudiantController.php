@@ -94,7 +94,18 @@ class EtudiantController extends Controller
      */
     public function update(Request $request, Etudiant $etudiant)
     {
-        //
+        $etudiant->update($request->all()) ;
+return response()->json([
+    'etudients'=>$etudiant
+]);
+        // $etudiant = Etudiant::create([
+        //     'nom' =>$params['nom'],
+        //     'prenom' => $params['prenom'],
+        //     'Age' => $params['Age'],
+        //     'genre' => $params['genre'] ,
+        // ]);
+        // return $etudiant;
+    
     }
 
     /**
