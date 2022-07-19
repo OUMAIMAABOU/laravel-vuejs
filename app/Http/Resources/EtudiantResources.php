@@ -15,17 +15,11 @@ class EtudiantResources extends JsonResource
     public function toArray($request)
     {
          return [
-            'id' => $this->id,
+            // 'id' => $this->id,
             'nom' => $this->nom,
             'prenom' => $this->prenom,
-            'age' => $this->age,
-           
-            // 'genre' => array_map(
-            //     function ($genre) {
-            //         return $genre['nom'];
-            //     },
-            //     $this->roles->toArray()
-            // ),
+            'Age' => $this->Age,
+            'genre' => $this->genre,
             
         ];
     }

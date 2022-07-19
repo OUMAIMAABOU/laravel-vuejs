@@ -18,12 +18,22 @@ class EtudiantController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-    
-            $Etudiant=Etudiant::all();
-        return response()->json($Etudiant);
+        $params = $request->all();
+        $data = Etudiant::query()->when(!empty($params['keyword']), function (Builder $query) use ($params) {
+            $query->where(function ($q) use ($params) {
+                $q->where('nom', 'like', '%' . $params['keyword'] . '%')
+                    ->orWhere('prenom', 'like', '%' . $params['keyword'] . '%');
+            });
+        })
+        ->paginate($params['page'] ?? 10);
 
+    
+        return EtudiantResources::collection($data);
+
+ //     $Etudiant=Etudiant::all();
+        // return response()->json($Etudiant);
     }
 
     /**
@@ -65,7 +75,6 @@ class EtudiantController extends Controller
     public function show(Etudiant $etudiant)
     {
         return new EtudiantResources($etudiant);
-
     }
 
     /**
@@ -74,14 +83,21 @@ class EtudiantController extends Controller
      * @param  \App\Models\Etudiant  $etudiant
      * @return \Illuminate\Http\Response
      */
-    public function edit(Etudiant $etudiant)
+    public function edit(Etudiant $request)
     {
-        $etudiants = Etudiant::get();
+        // $etudiants = Etudiant::get();
    
-        $etudiants=Etudiant::find($etudiant);
-        // return view('edite', compact('etudiants'));
-        return response()->json( $etudiants);
+        // $etudiants=Etudiant::find($etudiant);
+        // // return view('edite', compact('etudiants'));
+        // return response()->json( $etudiants);
+        $key = trim($request->get('q'));
 
+        $posts = Etudiant::query()
+            ->where('nom', 'like', "%{$key}%")
+            ->orWhere('prenom', 'like', "%{$key}%")
+            ->orderBy('created_at', 'desc')
+            ->get();
+            return $posts;
 
     }
 
